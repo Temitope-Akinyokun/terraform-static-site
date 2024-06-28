@@ -12,7 +12,7 @@ module "cloudfront" {
   bucket_arn = module.s3_bucket.bucket_arn
 }
 
-module "aws_route53_zone" {
+module "route53" {
   source = "./modules/route53"
   cloudfront-domain = module.cloudfront.cloudfront-domain-name
   cloudffront-hosted_zone_id = module.cloudfront.cloudffront-hosted_zone_id
@@ -20,4 +20,9 @@ module "aws_route53_zone" {
 
 module "aws_iam_role_policy_attachment" {
   source = "./modules/iam_roles"
+}
+
+module "aws_acm_certificate" {
+  source = "./modules/certificate"
+  aws_route53_zone_id = module.route53.aws_route53_zone_id
 }

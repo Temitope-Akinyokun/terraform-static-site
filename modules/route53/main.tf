@@ -13,3 +13,12 @@ resource "aws_route53_record" "root_domain" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "cname_record" {
+  zone_id = aws_route53_zone.primary.id
+  name    = var.domain_name
+  type    = "CNAME"
+
+  ttl  = 300
+  records = [var.cloudfront-domain]
+}

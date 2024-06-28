@@ -74,4 +74,6 @@ resource "aws_cloudfront_distribution" "cloudfront" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+
+  aliases = [ "www.temitope.i.ng" ]
 }
